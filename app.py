@@ -1,4 +1,3 @@
-from pyparsing import col
 import streamlit as st
 from fastai.vision.all import *
 from fastai.vision.widgets import *
@@ -15,7 +14,7 @@ st.set_page_config(
      initial_sidebar_state="expanded",
      menu_items={
          'Get Help': 'https://github.com/IBronko/',
-         'Report a bug': "https://github.com/IBronko/",
+         'Report a bug': "https://github.com/IBronko/fruit-image-classifier/issues",
          'About': "# This is a personal project."
      }
  )
@@ -24,13 +23,13 @@ st.set_page_config(
 # Display lottie file 
 #####################################
 
-st.markdown("<h1 style='text-align: center;'>Welcome, I am a Thai-Fruit classifier.</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Welcome, I am your personal Thai-Fruit classifier.</h1>", unsafe_allow_html=True)
 
 def load_lottiefile(filepath: str):
         with open(filepath, "r") as f:
             return json.load(f)
         
-lottie_coding = load_lottiefile("lottie.json")
+lottie_coding = load_lottiefile("images/lottie.json")
 col1, col2, col3 = st.columns(3)
 with col2:   
     st_lottie(
@@ -41,7 +40,10 @@ with col2:
         quality="medium", # medium ; high,
         key=None,
         )
-
+    
+#####################################
+# Modify model answers
+#####################################
 
 fruit_dict = {
     'custard apple':"This looks like a Custard Apple to me.", 
@@ -59,14 +61,24 @@ fruit_dict = {
     'thai bananas':"This looks like a Thai Banana to me."
     }
 
+#####################################
+# Load model 
+#####################################
+
+def load_model():
+    return load_learner("fruit_classifier.pkl")
+
+with st.spinner("I am collecting my thoughts..."):
+    model = load_model()
+    
+#####################################
+# Upload image and make inference 
+#####################################
 
 uploaded_image = st.file_uploader("Upload your image and I'll give it a try.", type=["png", "jpg"])
 if uploaded_image is not None:
     
     st.image(uploaded_image)
-    
-    with st.spinner("Loading your classifier..."):
-        model = load_learner("fruit_classifier.pkl")
     
     try:
         pred,pred_idx,probs = model.predict(uploaded_image.getvalue())
@@ -74,8 +86,26 @@ if uploaded_image is not None:
         st.caption(f"Caution: I have only been trained on a small set of images. I may also be wrong.")
     except:
         st.write("Sorry, I don't know that fruit")    
+
+#####################################
+# Infos
+#####################################
     
 with st.expander("Info"):
-     st.write("""
-         Some Text.
+     st.markdown("""
+         - I have been trained by fine-tuning a __ResNet18__ convolutional neural network
+         - For each fruit type, I have been provided around 100 images to learn from
+         - After 4 training runs (epochs), this was the result on the validation set:    
      """)
+     st.image("images/confusion_matrix.png")
+     st.markdown("""
+         Want to know more?
+         [Check out this Blog series](https://ibronko.hashnode.dev/series/fast-ai)   
+     """)
+     
+if st.button("Press button to load example image"):
+    example_image = "images/example_image.jpg" 
+    st.image(example_image)
+    pred,pred_idx,probs = model.predict(example_image)
+   
+    st.success(f"{fruit_dict[pred]} I am {probs[pred_idx]*100:.0f}% confident.")
