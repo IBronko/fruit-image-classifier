@@ -2,6 +2,10 @@
 
 This little AI powered App let's you upload an image of a Thai-Fruit and classfies it for you.
 
+## Open App
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/ibronko/fruit-image-classifier/app.py)
+
 ![fruit](https://user-images.githubusercontent.com/67829673/174478942-4ba29920-a926-4a06-a8f4-3a48a4f7510a.png)
 
 ## Project description
