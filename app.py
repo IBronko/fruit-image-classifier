@@ -100,7 +100,7 @@ with st.expander("Info"):
      st.image("images/confusion_matrix.png")
      st.markdown("""
          Want to know more?
-         [Check out this Blog series](https://ibronko.hashnode.dev/series/fast-ai)   
+         [Check out this Blog Series](https://ibronko.hashnode.dev/series/fast-ai)   
      """)
      
 if st.button("Press button to load example image"):
