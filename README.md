@@ -1,7 +1,5 @@
 # Thai-Fruit Image Classifier App
 
-This little AI powered App let's you upload an image of a Thai-Fruit and classfies it for you.
-
 ## Open App
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/ibronko/fruit-image-classifier/app.py)
@@ -10,7 +8,7 @@ This little AI powered App let's you upload an image of a Thai-Fruit and classfi
 
 ## Project description
 
-The project is part of my learning journey with Fast.ai's course [Practical Deep Learning for Coders](https://course.fast.ai).
+ML powered app to classify Thai-Fruits by images.
 
 ## To run this app locally
 
@@ -19,9 +17,5 @@ The project is part of my learning journey with Fast.ai's course [Practical Deep
 3. Install dependencies in virtual environment according to Pipfile
 4. Activate virtual environment
 5. Within the project folder type `streamlit run app.py` in your terminal
-
-## Want to know more?
-
-[Read the Blog Series](https://ibronko.hashnode.dev/series/fast-ai)
 
 Let me know, if you have any questions or comments 👋
