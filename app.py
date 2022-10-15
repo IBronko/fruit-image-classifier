@@ -98,10 +98,7 @@ with st.expander("Info"):
          - After 4 training runs (epochs), this was the result on the validation set:    
      """)
      st.image("images/confusion_matrix.png")
-     st.markdown("""
-         Want to know more?
-         [Check out this Blog Series](https://ibronko.hashnode.dev/series/fast-ai)   
-     """)
+
      
 if st.button("Press button to load example image"):
     example_image = "images/example_image.jpg" 
